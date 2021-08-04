@@ -1,5 +1,5 @@
-from lib.keyvault import keyvault
-from lib.config import config
+from keyvault import keyvault
+from config import config
 
 keyvaults = {}
 
