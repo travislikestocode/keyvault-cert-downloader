@@ -15,7 +15,7 @@ class Output:
     return [f for f in listdir(self._dir) if isfile(join(self._dir, f))]
 
   def _output_file(self, secret_name, version, value):
-    _file_name = self._make_filename(secret_name, config['cert_ext'])
+    _file_name = self._make_filename(secret_name, config['output']['ext'])
     _fullpath = path.join(self._dir, _file_name)
 
     with open(_fullpath, 'w') as writer:
@@ -25,6 +25,6 @@ class Output:
   def secrets(self):
     return map(lambda s: s.split('.')[0], self._file_names)
 
-  def sync(self, secrets):
-    for s in secrets:
+  def sync(self, kv_secrets):
+    for s in kv_secrets:
       self._output_file(s.name, s.properties.version, s.value)

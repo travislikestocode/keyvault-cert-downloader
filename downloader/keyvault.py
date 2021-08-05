@@ -16,9 +16,13 @@ class Keyvault:
     return self.__kv_client
 
   @property
-  def secret_list(self):
+  def _secret_list(self):
     return self._kv_client.list_properties_of_secrets()
   
-  def get_secret(self, name):
+  def _get_secret(self, name):
     secret = self._kv_client.get_secret
     return secret(name)
+
+  @property
+  def secrets(self):
+    return map(lambda s: self._get_secret(s.name), self._secret_list)

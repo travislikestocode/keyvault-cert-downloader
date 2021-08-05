@@ -3,7 +3,6 @@ from keyvault import Keyvault
 from output import Output
 
 vault = Keyvault(list(config['keyvaults'].keys())[0])
-cert_dir = Output(config['cert_dir'])
-secrets = map(lambda s: vault.get_secret(s.name), vault.secret_list)
+local_storage = Output(config['output']['dir'])
 
-cert_dir.sync(secrets)
+local_storage.sync(vault.secrets)
