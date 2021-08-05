@@ -16,7 +16,7 @@ class Keyvault:
     return self.__kv_client
 
   @property
-  def secrets(self):
+  def secret_list(self):
     return self._kv_client.list_properties_of_secrets()
   
   def get_secret(self, name):
