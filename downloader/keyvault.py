@@ -1,7 +1,7 @@
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
 
-class keyvault:
+class Keyvault:
   def __init__(self, name):
     self.uri = 'https://{}.vault.azure.net'.format(name)
     self.__kv_client = None
@@ -22,4 +22,3 @@ class keyvault:
   def get_secret(self, name):
     secret = self._kv_client.get_secret
     return secret(name)
-

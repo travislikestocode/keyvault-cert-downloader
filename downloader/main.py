@@ -1,13 +1,13 @@
-from keyvault import keyvault
+from keyvault import Keyvault
 from config import config
+from files import Files
 
-keyvaults = {}
+vault = Keyvault(list(config['keyvaults'].keys())[0])
+cert_dir = Files(config['cert_dir'])
 
-for kv in config.keys():
-  keyvaults[kv] = keyvault(kv)
-
-for vault in keyvaults.values():
-  for secret in vault.secrets:
+for secret in vault.secrets:
     s = vault.get_secret(secret.name)
-    print(s.name)
-    print(s.value)
+    cert_filename = Files.make_filename(s.name, config['cert_ext'])
+
+    if cert_filename not in cert_dir.file_names:
+      cert_dir.output_file(cert_filename, s.value)
