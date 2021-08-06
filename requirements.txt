@@ -1,4 +1,5 @@
 pyyaml==5.4.1
 azure-identity==1.6.0
-azure-keyvault-certificates==4.3.0
+azure-keyvault-secrets==4.3.0
 cryptography==3.4.7
+dbus-python==1.2.16
