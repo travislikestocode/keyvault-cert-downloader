@@ -1,3 +1,4 @@
 pyyaml==5.4.1
 azure-identity==1.6.0
 azure-keyvault-certificates==4.3.0
+cryptography==3.4.7
