@@ -1,6 +1,7 @@
 from os import listdir, path
 from os.path import isfile, join
 from config import config
+import certificate
 
 class Output:
   def __init__(self, dir):
@@ -14,12 +15,13 @@ class Output:
   def _file_names(self):
     return [f for f in listdir(self._dir) if isfile(join(self._dir, f))]
 
-  def _output_file(self, secret_name, version, value):
+  def _output_file(self, secret_name, version, value_pkcs12):
     _file_name = self._make_filename(secret_name, config['output']['ext'])
     _fullpath = path.join(self._dir, _file_name)
+    _value_pem = certificate.pkcs12_to_pem(value_pkcs12)
 
-    with open(_fullpath, 'w') as writer:
-      writer.write(value)
+    with open(_fullpath, 'wb') as writer:
+      writer.write(_value_pem)
 
   @property
   def secrets(self):
