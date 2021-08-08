@@ -1,4 +1,3 @@
-from os import access
 import sys
 import dbus
 

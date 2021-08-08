@@ -3,14 +3,14 @@ from azure.keyvault.secrets import SecretClient
 
 class Keyvault:
   def __init__(self, name):
-    self.uri = 'https://{}.vault.azure.net'.format(name)
+    self._uri = 'https://{}.vault.azure.net'.format(name)
     self.__kv_client = None
 
   @property
   def _kv_client(self):
     if self.__kv_client is None:
       self.__kv_client = SecretClient(
-        vault_url=self.uri,
+        vault_url=self._uri,
         credential=DefaultAzureCredential()
       )
     return self.__kv_client

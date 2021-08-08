@@ -10,10 +10,6 @@ class Output:
     self._dir = dir
     self._version_xattr = 'user.kvdl_version'
 
-  @classmethod
-  def _make_filename(cls, cert_name, ext):
-    return cert_name + ext
-
   @property
   def _secrets(self):
     __secrets = []
@@ -29,7 +25,7 @@ class Output:
     return __secrets
 
   def _output_file(self, secret_name, version, value_pkcs12):
-    _file_name = self._make_filename(secret_name, config['output']['ext'])
+    _file_name = secret_name + '.' + config['output']['ext']
     _fullpath = path.join(self._dir, _file_name)
     _value_pem = certificate.pkcs12_to_pem(value_pkcs12)
 
