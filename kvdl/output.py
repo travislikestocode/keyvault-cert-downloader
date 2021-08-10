@@ -1,8 +1,8 @@
 from os import listdir, path
 from os.path import isfile, join
-from config import config
-from models import LocalSecret
-import certificate
+from .config import config
+from .models import LocalSecret
+from .certificate import pkcs12_to_pem
 import xattr
 
 class Output:
@@ -27,7 +27,7 @@ class Output:
   def _output_file(self, secret_name, version, value_pkcs12):
     _file_name = secret_name + '.' + config['output']['ext']
     _fullpath = path.join(self._dir, _file_name)
-    _value_pem = certificate.pkcs12_to_pem(value_pkcs12)
+    _value_pem = pkcs12_to_pem(value_pkcs12)
 
     with open(_fullpath, 'wb') as writer:
       writer.write(_value_pem)

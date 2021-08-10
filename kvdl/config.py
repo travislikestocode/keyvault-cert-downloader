@@ -1,5 +1,5 @@
 import yaml
-from args import args
+from .args import args
 
 config = yaml.load(args.config_file, Loader=yaml.FullLoader)
 
